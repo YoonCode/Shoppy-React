@@ -1,6 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,10 +20,15 @@ const auth = getAuth()
 const provider = new GoogleAuthProvider()
 
 export function login() {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      const user = result.user
-      console.log(user)
-    })
-    .catch(console.error)
+  signInWithPopup(auth, provider).catch(console.error)
+}
+
+export function logout() {
+  signOut(auth).catch(console.error)
+}
+
+export function onUserStateChange(callback) {
+  onAuthStateChanged(auth, (user) => {
+    callback(user)
+  })
 }
