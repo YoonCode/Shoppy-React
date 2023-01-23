@@ -8,3 +8,4 @@
 4. [React Icons](https://react-icons.github.io/react-icons/)
 5. [TailwindCSS](https://tailwindcss.com/)
 6. [UUID](https://www.npmjs.com/package/uuid)
+7. [React Query](https://tanstack.com/query/v4/docs/react/overview)
