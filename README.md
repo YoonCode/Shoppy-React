@@ -9,3 +9,4 @@
 5. [TailwindCSS](https://tailwindcss.com/)
 6. [UUID](https://www.npmjs.com/package/uuid)
 7. [React Query](https://tanstack.com/query/v4/docs/react/overview)
+8. [Reference Blog](https://tkdodo.eu/blog/practical-react-query#create-custom-hooks)
