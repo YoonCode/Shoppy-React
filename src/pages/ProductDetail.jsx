@@ -1,20 +1,21 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { addOrUpdateToCart } from '../api/firebase'
 import Button from '../components/ui/Button'
+import { useAuthContext } from '../context/AuthContext'
 
 export default function ProductDetail() {
+  const { uid } = useAuthContext()
   const {
     state: {
       product: { id, image, title, description, category, price, options },
     },
   } = useLocation()
   const [selected, setSelected] = useState(options && options[0])
-  const handleSelect = (e) => {
-    setSelected(e.target.value)
-  }
+  const handleSelect = (e) => setSelected(e.target.value)
   const handleClick = (e) => {
-    // 여기서 장바구니에 추가하면 됨!
+    const product = { id, image, title, price, option: selected, quantity: 1 }
+    addOrUpdateToCart(uid, product)
   }
 
   return (
@@ -24,7 +25,7 @@ export default function ProductDetail() {
         <img className="w-full px-4 basis-7/12" src={image} alt={title} />
         <div className="w-full basis-5/12 flex flex-col p-4">
           <h2 className="text-3xl font-bold py-2">{title}</h2>
-          <p className="text-2xl font-bold py-2 border-b border-gray-400">
+          <p className="text-2xl font-bold py-2  border-b border-gray-400">
             ₩{price}
           </p>
           <p className="py-4 text-lg">{description}</p>
